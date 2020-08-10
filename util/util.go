@@ -14,6 +14,6 @@ func reverse(s string) string {
 }
 
 func isPalindrome(str string) bool {
-	strRev := reverse(str)
-	return strRev == str
+    strRev := reverse(str)
+    return strRev == str
 }
