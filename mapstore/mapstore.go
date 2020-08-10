@@ -1,8 +1,8 @@
 package mapstore
 
 import (
-	"github.com/go-messenger/domain"
 	"errors"
+	"github.com/rashmi43/go-messenger/domain"
 )
 
 type MapStore struct {
@@ -10,30 +10,30 @@ type MapStore struct {
 }
 
 func NewMapStore() *MapStore {
-	return &MapStore { store: make(map[string]domain.Message)}
+	return &MapStore{store: make(map[string]domain.Message)}
 }
 
-func (m MapStore) Create(c domain.Message)(error) {
+func (m MapStore) Create(c domain.Message) error {
 	messageID := c.ID
-	if _,ok := m.store[messageID]; ok {
+	if _, ok := m.store[messageID]; ok {
 		return errors.New("The message id already exists in store")
 	}
 	m.store[messageID] = c
 	return nil
 }
 
-func (m MapStore) Update( newid string, c domain.Message )(error) {
+func (m MapStore) Update(newid string, c domain.Message) error {
 	messageID := newid
-	if _,ok := m.store[messageID]; ok {
+	if _, ok := m.store[messageID]; ok {
 		return errors.New("The message with the given ID doesn't exist")
 	}
 	m.store[messageID] = c
 	return nil
 }
 
-func (m MapStore) Delete(id string)(error) {
+func (m MapStore) Delete(id string) error {
 	messageID := id
-	if _,ok := m.store[messageID]; !ok {
+	if _, ok := m.store[messageID]; !ok {
 		return errors.New("The message with the given ID doesn't exist")
 	}
 	delete(m.store, messageID)
@@ -41,20 +41,20 @@ func (m MapStore) Delete(id string)(error) {
 
 }
 
-func (m MapStore) GetAll()([]domain.Message, error) {
+func (m MapStore) GetAll() ([]domain.Message, error) {
 	messageList := []domain.Message{}
-	for _, v := range(m.store) {
-		messageList = append(messageList,v)
+	for _, v := range m.store {
+		messageList = append(messageList, v)
 	}
 	return messageList, nil
 
 }
 
-func (m MapStore) GetById(id string) (domain.Message, error){
+func (m MapStore) GetById(id string) (domain.Message, error) {
 	messageID := id
-	if message,ok := m.store[messageID]; !ok {
+	if message, ok := m.store[messageID]; !ok {
 		return domain.Message{}, errors.New("The message with the given ID doesn't exist")
-	} else{
+	} else {
 		return message, nil
 	}
 

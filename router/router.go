@@ -2,10 +2,8 @@ package router
 
 import (
 	"github.com/gorilla/mux"
-	c "github.com/go-messenger/controller"
-
+	c "github.com/rashmi43/go-messenger/controller"
 )
-
 
 // SetMessageRoutes registers routes for messages
 func SetMessageRoutes(messageController *c.MessageController) *mux.Router {

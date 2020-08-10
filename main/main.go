@@ -1,18 +1,18 @@
 package main
 
 import (
-	"github.com/go-messenger/mapstore"
-	r "github.com/go-messenger/router"
-	"time"
-	"net/http"
+	cc "github.com/rashmi43/go-messenger/controller"
+	"github.com/rashmi43/go-messenger/mapstore"
+	r "github.com/rashmi43/go-messenger/router"
 	"log"
-	cc "github.com/go-messenger/controller"
+	"net/http"
+	"time"
 )
 
 func main() {
-	controller := &cc.MessageController { //Facade
-	Store : mapstore.NewMapStore(), // Inject the dependency
-	// store: = mongodb.NewMongoStore() 
+	controller := &cc.MessageController{ //Facade
+		Store: mapstore.NewMapStore(), // Inject the dependency
+		// store: = mongodb.NewMongoStore()
 	}
 
 	router := r.SetMessageRoutes(controller)
@@ -30,5 +30,3 @@ func main() {
 	log.Fatal(srv.ListenAndServe())
 
 }
-
-
