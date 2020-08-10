@@ -13,7 +13,7 @@ func reverse(s string) string {
     return string(rns)
 }
 
-func isPalindrome(str string) bool {
-	strRev := reverse(str)
-	return strRev == str
+func isPalindrome(msgStr string) bool {
+    strRev := reverse(msgStr)
+    return strRev == msgStr
 }
