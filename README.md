@@ -1,8 +1,8 @@
 # go-messenger
 
-# Architecture
+## Architecture
 
-# How to build
+## How to build
 Using Dockerfile:
 
 docker build -t "go-messenger" .
@@ -12,12 +12,12 @@ Using CLI:
 cd github.com/go-messenger
 go run main.go
 
-# How to access
+## How to access
 Use HTTP protocol and port 8001 to access the application, type in your browser
 http://ip:8081/v1/messages
 
-# REST API
-# Create a message
+## REST API
+### Create a message
 curl -X POST 'http://localhost:8001/v1/messages' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -26,11 +26,11 @@ curl -X POST 'http://localhost:8001/v1/messages' \
     "submitter": "rashmi"
 }'
 
-# GET All Messages
+### GET All Messages
 curl --location --request GET 'http://localhost:8001/v1/messages' \
 --header 'Content-Type: application/json'
 
-# GET  message by id
+### GET  message by id
 curl --location --request GET 'http://localhost:8001/v1/messages/2' \
 --header 'Content-Type: application/json'
 
