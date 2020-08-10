@@ -5,6 +5,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/pkg/errors"
 	"github.com/rashmi43/go-messenger/domain"
+	util "github.com/rashmi43/go-messenger/util"
 	"net/http"
 	//"log"
 	"encoding/json"
@@ -81,7 +82,11 @@ func (ctl MessageController) GetById(w http.ResponseWriter, r *http.Request) (in
 		fmt.Println("Error:", err)
 		return nil, http.StatusBadRequest, errors.Wrap(err, "Error on getting Message")
 	}
-	fmt.Println("Message retrieved", message)
+	fmt.Println("Message retrieved", message.Text)
+	isPalindrome := util.isPalindrome(message.Text)
+	if isPalindrome == true {
+		fmt.Println("Message is a palindrome!!")
+	}
 	return message, http.StatusOK, nil
 
 }
