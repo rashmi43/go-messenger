@@ -83,7 +83,7 @@ func (ctl MessageController) GetById(w http.ResponseWriter, r *http.Request) (in
 		return nil, http.StatusBadRequest, errors.Wrap(err, "Error on getting Message")
 	}
 	fmt.Println("Message retrieved", message.Text)
-	isPalindrome := util.isPalindrome(message.Text)
+	isPalindrome := util.IsPalindrome(message.Text)
 	if isPalindrome == true {
 		fmt.Println("Message is a palindrome!!")
 	}
