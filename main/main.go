@@ -3,6 +3,7 @@ package main
 import (
 	cc "github.com/rashmi43/go-messenger/controller"
 	"github.com/rashmi43/go-messenger/mapstore"
+        mw "github.com/rashmi43/go-messenger/middleware"
 	r "github.com/rashmi43/go-messenger/router"
 	"log"
 	"net/http"
@@ -18,7 +19,7 @@ func main() {
 	router := r.SetMessageRoutes(controller)
 	// A Server defines parameters for running an HTTP server.
 	srv := &http.Server{
-		Handler: router,
+		Handler: mw.MiddlewareFirst(router),
 		Addr:    "0.0.0.0:8001",
 		// Good practice: enforce timeouts for servers you create!
 		WriteTimeout: 15 * time.Second,
