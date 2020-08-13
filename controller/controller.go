@@ -49,6 +49,7 @@ func (ctl MessageController) Post(w http.ResponseWriter, r *http.Request) (inter
 	var message domain.Message
 	err := decoder.Decode(&message)
 	if err != nil {
+                // not a good practise, panic is if we cannot continue at all
 		panic(err)
 	}
 	err = ctl.Store.Create(message)

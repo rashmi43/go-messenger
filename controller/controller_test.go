@@ -5,14 +5,18 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
+        "github.com/rashmi43/go-messenger/mapstore"
 	"github.com/gorilla/mux"
 )
 
 // TestGetMessages test HTTP Get to "/v1/messages" using ResponseRecorder
 func TestGetMessages(t *testing.T) {
 	r := mux.NewRouter()
-	r.Handle("/v1/messages", ResponseHandler(MessageController.Get)).Methods("GET")
+        controller := &MessageController{ //Facade
+		Store: mapstore.NewMapStore(), // Inject the dependency
+		// store: = mongodb.NewMongoStore()
+	}
+	r.Handle("/v1/messages", ResponseHandler(controller.Get)).Methods("GET")
 	//r.HandleFunc("/v1/messages", getMessages).Methods("GET")
 	req, err := http.NewRequest("GET", "/v1/messages", nil)
 	if err != nil {
@@ -29,8 +33,11 @@ func TestGetMessages(t *testing.T) {
 // TestGetMessagesWithServer test HTTP Get to "/v1/messages" using Server
 func TestGetMessagesWithServer(t *testing.T) {
 	r := mux.NewRouter()
-	r.Handle("/v1/messages", ResponseHandler(MessageController.Get)).Methods("GET")
-	//r.HandleFunc("/v1/messages", getMessages).Methods("GET")
+        controller := &MessageController{ //Facade
+		Store: mapstore.NewMapStore(), // Inject the dependency
+		// store: = mongodb.NewMongoStore()
+	}
+	r.Handle("/v1/messages", ResponseHandler(controller.Get)).Methods("GET")
 	server := httptest.NewServer(r)
 	defer server.Close()
 	messagesURL := fmt.Sprintf("%s/v1/messages", server.URL)
