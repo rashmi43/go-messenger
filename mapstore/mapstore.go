@@ -23,11 +23,10 @@ func (m MapStore) Create(c domain.Message) error {
 }
 
 func (m MapStore) Update(newid string, c domain.Message) error {
-	messageID := newid
-	if _, ok := m.store[messageID]; ok {
-		return errors.New("The message with the given ID doesn't exist")
+	if _, ok := m.store[newid]; !ok {
+		return errors.New("The message with the given ID doesn't exist "+newid)
 	}
-	m.store[messageID] = c
+	m.store[newid] = c
 	return nil
 }
 
