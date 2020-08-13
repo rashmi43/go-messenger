@@ -5,9 +5,13 @@
 ## How to clone and run
 
 git clone https://github.com/rashmi43/go-messenger.git
+
 cd go-messenger/
+
 go get -v -t -d ./...
+
 go build ./...
+
 go run main.go
 
 ## How to build
