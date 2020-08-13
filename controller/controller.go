@@ -101,7 +101,12 @@ func (ctl MessageController) Put(w http.ResponseWriter, r *http.Request) (interf
 	if err != nil {
 		panic(err)
 	}
-	err = ctl.Store.Update(mId, c)
+        // Allow id update
+        if (c.ID != mId) {
+          fmt.Println("Id has changed, cannot update")
+        } else {
+	  err = ctl.Store.Update(mId, c)
+        }
 	if err != nil {
 		fmt.Println("Error:", err)
 		return nil, http.StatusBadRequest, errors.Wrap(err, "Error updating message"+mId)
@@ -121,6 +126,6 @@ func (ctl MessageController) Delete(w http.ResponseWriter, r *http.Request) (int
 		return nil, http.StatusBadRequest, errors.Wrap(err, "Error deleting message"+mId)
 	}
 	fmt.Println("Message has been deleted")
-	return "essage has been deleted", http.StatusOK, nil
+	return nil, http.StatusOK, nil
 
 }
