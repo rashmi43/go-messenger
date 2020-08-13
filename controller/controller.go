@@ -9,7 +9,7 @@ import (
 	"net/http"
 	//"log"
 	"encoding/json"
-	util "github.com/shijuvar/gokit/examples/http-app/pkg/apputil"
+	apputil "github.com/shijuvar/gokit/examples/http-app/pkg/apputil"
 )
 
 // response used to send HTTP responses
@@ -30,7 +30,7 @@ func ResponseHandler(h func(http.ResponseWriter, *http.Request) (interface{}, in
 			// Send JSON response back to the client application
 			err = json.NewEncoder(w).Encode(response{Data: data})
 			if err != nil {
-				util.Error.Printf("Error from Handler: %s\n", err.Error())
+				apputil.Error.Printf("Error from Handler: %s\n", err.Error())
 			}
 		}
 
