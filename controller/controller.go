@@ -104,6 +104,7 @@ func (ctl MessageController) Put(w http.ResponseWriter, r *http.Request) (interf
         // Allow id update
         if (c.ID != mId) {
           fmt.Println("Id has changed, cannot update")
+          return nil, http.StatusBadRequest, errors.Wrap(err, "ID has changed, cannot update")
         } else {
 	  err = ctl.Store.Update(mId, c)
         }
